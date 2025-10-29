@@ -7,7 +7,7 @@ import { ListModal } from "./listModal";
 import { useListModals } from "../hooks/useListModals";
 import { formatDate, dateFormats } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
-import { Edit, Plus, Trash2 } from "lucide-react";
+import { Edit, List, Plus, Trash2 } from "lucide-react";
 
 export default function ListView() {
   const { listItems, deleteItem, clearAll } = useListStore();
@@ -62,16 +62,21 @@ export default function ListView() {
                   <th className="w-[100px] px-4 py-3 font-medium text-muted-foreground text-center">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y">
-                <AnimatePresence initial={false}>
+              <motion.tbody layout className="divide-y">
+                <AnimatePresence initial={false} mode="popLayout">
                   {listItems.map((item) => (
                     <motion.tr
                       key={item.id}
-                      layout
-                      initial={{ opacity: 0, y: 6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -6 }}
-                      transition={{ duration: 0.2, ease: [0.2, 0.8, 0.2, 1] }}
+                      layout="position"
+                      initial={{ opacity: 0, y: 8, backgroundColor: 'hsl(var(--accent) / 0.06)' }}
+                      animate={{ opacity: 1, y: 0, backgroundColor: 'transparent' }}
+                      exit={{ opacity: 0, y: -8 }}
+                      transition={{
+                        opacity: { duration: 0.18 },
+                        y: { duration: 0.22, ease: [0.2, 0.8, 0.2, 1] },
+                        backgroundColor: { duration: 0.6, ease: 'easeOut' },
+                        layout: { duration: 0.22 }
+                      }}
                       className="hover:bg-muted/30"
                     >
                       <td className="px-4 py-3 font-medium text-foreground text-left">{item.title}</td>
@@ -92,7 +97,7 @@ export default function ListView() {
                     </motion.tr>
                   ))}
                 </AnimatePresence>
-              </tbody>
+              </motion.tbody>
             </table>
           </div>
         </div>
