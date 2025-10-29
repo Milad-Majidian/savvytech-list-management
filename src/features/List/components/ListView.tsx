@@ -1,20 +1,45 @@
+import { Button } from "@/components/elements/Button";
 import { useListStore } from "../store/listStore";
 import { ListEmptyState } from "./itemEmptyState";
-import { ListItemCard } from "./ListItemCard";
+import { ListItem } from "./ListItem";
+import { ListModal } from "./listModal";
+import { useState } from "react";
 
 export default function ListView() {
   const { listItems } = useListStore();
+  const [open, setOpen] = useState(false);
+  const [editingItem, setEditingItem] = useState(null);
 
-  if (listItems.length === 0) return <ListEmptyState />;
+  const handleEdit = (item: any) => {
+    setEditingItem(item);
+    setOpen(true);
+  };
+
+  const handleCreate = () => {
+    setEditingItem(null);
+    setOpen(true);
+  };
+
 
   return (
     <>
       <div className="p-4">
-        <h2 className="text-2xl font-bold mb-4">List Items</h2>
+             <div className="flex justify-between items-center">
+        <h2 className="text-2xl font-semibold">List Management</h2>
+        <Button onClick={handleCreate}>Create</Button>
+      </div>
 
-        {listItems.map((listItem) => (
-          <ListItemCard key={listItem.id} listItem={listItem} />
-        ))}
+        <div className="space-y-3">
+        {listItems.length ? (
+          listItems.map(item => (
+            <ListItem key={item.id} item={item} onEdit={handleEdit} />
+          ))
+        ) : (
+            <ListEmptyState />
+        )}
+      </div>
+
+      <ListModal open={open} onOpenChange={setOpen} editingItem={editingItem} />
       </div>
     </>
   );

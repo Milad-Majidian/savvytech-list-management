@@ -2,5 +2,6 @@ export interface ListItem {
     id: string;
     title: string;
     subTitle: string;
-    createAt: Date;
+    createdAt: Date;
+    updatedAt?: Date;
 }

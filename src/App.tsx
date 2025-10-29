@@ -7,7 +7,9 @@ function App() {
 
   return (
     <Layout> 
-      <ListView />
+      <div className="space-y-8">
+        <ListView />
+      </div>
     </Layout>
   )
 }
