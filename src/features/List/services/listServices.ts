@@ -30,6 +30,13 @@ export const listServices = {
         return updatedListItems;
     },
 
+    delete: (id: string): ListItem[] => {
+        const listItems = listServices.getAll();
+        const updatedListItems = listItems.filter(item => item.id !== id);
+        listServices.saveAll(updatedListItems);
+        return updatedListItems;
+    },
+
     clearAll: (): void => {
         localStorage.removeItem(STORAGE_KEY);
     }

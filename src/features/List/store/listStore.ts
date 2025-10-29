@@ -7,6 +7,8 @@ interface ListStore {
   listItems: ListItem[];
   addItem: (item: Omit<ListItem, "id" | "createdAt">) => void;
   updateItem: (item: ListItem) => void;
+  deleteItem: (id: string) => void;
+  clearAll: () => void;
 }
 
 export const useListStore = create<ListStore>()(
@@ -29,6 +31,12 @@ export const useListStore = create<ListStore>()(
       // update existing list item
       updateItem: (item: ListItem) => {
         const updated = listServices.update(item);
+        set({ listItems: updated });
+      },
+
+      // Delete list item by id
+      deleteItem: (id: string) => {
+        const updated = listServices.delete(id);
         set({ listItems: updated });
       },
 

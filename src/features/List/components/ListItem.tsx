@@ -1,13 +1,14 @@
 import type { ListItem } from "../types";
 import { Button } from "@/components/elements/Button";
-import { Edit } from "lucide-react";
+import { Edit, Trash2 } from "lucide-react";
 
 interface ListItemProps {
   item: ListItem;
   onEdit: (listItem:ListItem) => void;
+  onDelete: (listItem:ListItem) => void;
 }
 
-export function ListItem({ item , onEdit }: ListItemProps) {
+export function ListItem({ item , onEdit, onDelete }: ListItemProps) {
 
    const format = (date: Date, formatStr: string) => {  
     const d = new Date(date);
@@ -39,8 +40,8 @@ export function ListItem({ item , onEdit }: ListItemProps) {
         <Button size="sm" variant="secondary" onClick={() => onEdit(item)} className="cursor-pointer">
           <Edit className="w-4 h-4" />
         </Button>
-        <Button size="sm" variant="destructive" onClick={() => {}}>
-          Delete
+        <Button size="sm" variant="destructive" onClick={() => onDelete(item)} className="cursor-pointer">
+          <Trash2 className="w-4 h-4" />
         </Button>
       </div>
       </div>
