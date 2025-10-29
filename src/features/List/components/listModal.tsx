@@ -47,13 +47,23 @@ export const ListModal = ({ open, onOpenChange, editingItem }: Props) => {
       description={editingItem ? "Update your list item details" : "Create a new list item"}
       size="md"
       footer={
-        <ModalFooter>
-          <Button appVariant="ghost" onClick={() => onOpenChange(false)}>
+        <ModalFooter className="gap-4">
+            <Button 
+            appVariant="ghost" 
+            onClick={() => onOpenChange(false)}
+            className="border border-zinc-200 cursor-pointer"
+            >
             Cancel
-          </Button>
-          <Button type="submit" form="list-item-form">
+            </Button>
+            <Button 
+            type="submit" 
+            form="list-item-form"
+            // className="bg-primary text-primary-foreground hover:bg-primary/90"
+
+            className="bg-blue-500 text-primary-foreground hover:bg-blue-600 cursor-pointer"
+            >
             {editingItem ? "Update" : "Create"}
-          </Button>
+            </Button>
         </ModalFooter>
       }
     >

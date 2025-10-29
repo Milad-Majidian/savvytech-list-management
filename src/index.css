@@ -75,6 +75,8 @@
 html {
   /* Prevent flash of unstyled content */
   color-scheme: light;
+  /* Reserve scrollbar space to avoid layout shift on modal open */
+  overflow-y: scroll;
 }
 
 html.dark {
@@ -140,15 +142,50 @@ button {
   background-color: rgba(0, 0, 0, 0.7) !important;
 }
 
-/* Modal content animations */
-[data-state="open"] {
-  animation-duration: 300ms !important;
-  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+/* Modal animations - smooth and centered, scoped to our modal classes */
+/* Hard-center safeguard to ensure content uses viewport center even if parent styles conflict */
+.radix-dialog-content {
+  position: fixed !important;
+  left: 50% !important;
+  top: 50% !important;
+}
+/* Use individual transform property 'scale' to avoid overriding base translate centering */
+@keyframes smooth-modal-enter {
+  0%   { opacity: 0; scale: 0.96; }
+  100% { opacity: 1; scale: 1; }
 }
 
-[data-state="closed"] {
-  animation-duration: 200ms !important;
-  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+@keyframes smooth-modal-exit {
+  0%   { opacity: 1; scale: 1; }
+  100% { opacity: 0; scale: 0.96; }
+}
+
+@keyframes smooth-overlay-enter {
+  0%   { opacity: 0; backdrop-filter: blur(0px); }
+  100% { opacity: 1; backdrop-filter: blur(4px); }
+}
+
+@keyframes smooth-overlay-exit {
+  0%   { opacity: 1; backdrop-filter: blur(4px); }
+  100% { opacity: 0; backdrop-filter: blur(0px); }
+}
+
+.modal-content { transform-origin: center center; will-change: transform, opacity, scale; }
+
+.modal-content[data-state="open"] {
+  animation: smooth-modal-enter 350ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.modal-content[data-state="closed"] {
+  animation: smooth-modal-exit 250ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.modal-overlay[data-state="open"] {
+  animation: smooth-overlay-enter 350ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.modal-overlay[data-state="closed"] {
+  animation: smooth-overlay-exit 250ms cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
 /* Reduced motion for accessibility */

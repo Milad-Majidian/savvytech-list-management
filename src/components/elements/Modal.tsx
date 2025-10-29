@@ -1,5 +1,4 @@
 import React from 'react'
-import { X } from 'lucide-react'
 import {
   Dialog,
   DialogContent,
@@ -8,7 +7,6 @@ import {
   DialogDescription,
   DialogFooter,
 } from '@/components/ui/dialog'
-import { Button } from '@/components/elements/Button'
 import { cn } from '@/lib/utils'
 
 export type ModalSize = 'sm' | 'md' | 'lg'
@@ -50,13 +48,8 @@ export const Modal: React.FC<ModalProps> = ({
           'text-gray-900 dark:text-gray-100',
           'shadow-xl dark:shadow-2xl',
           
-          // Enhanced smooth animations
-          'data-[state=open]:animate-in data-[state=closed]:animate-out',
-          'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
-          'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
-          'data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%]',
-          'data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]',
-          'duration-300 ease-out',
+          // Use scoped CSS animations via index.css (keeps perfect centering)
+          'modal-content',
           
           // Size
           sizeClasses[size],
@@ -66,13 +59,13 @@ export const Modal: React.FC<ModalProps> = ({
         )}
       >
         {/* Close button */}
-        <Button
+        {/* <Button
           appVariant="ghost"
           onClick={() => onOpenChange(false)}
           className="absolute right-3 top-3 h-8 w-8 p-0 rounded-full hover:bg-accent"
         >
           <X className="h-4 w-4" />
-        </Button>
+        </Button> */}
         
         {/* Header */}
         {(title || description) && (

@@ -60,13 +60,8 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
           'text-gray-900 dark:text-gray-100',
           'shadow-xl dark:shadow-2xl',
           
-          // Enhanced smooth animations
-          'data-[state=open]:animate-in data-[state=closed]:animate-out',
-          'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
-          'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
-          'data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%]',
-          'data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]',
-          'duration-300 ease-out',
+          // Use scoped CSS animations via index.css (keeps perfect centering)
+          'modal-content',
           
           // Size
           'max-w-md',
@@ -117,8 +112,8 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
               className={cn(
                 'px-6 py-2 rounded-lg transition-all duration-200 font-medium shadow-sm hover:shadow-md w-auto',
                 isDestructive
-                  ? 'bg-red-600 hover:bg-red-700 dark:bg-red-600 dark:hover:bg-red-500 text-white'
-                  : 'bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 text-white'
+                  ? 'bg-red-500 hover:bg-red-700 dark:bg-red-600 dark:hover:bg-red-500 text-white'
+                  : 'bg-blue-500 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 text-white'
               )}
             >
               {/* {isDestructive && <Trash2 className="w-4 h-4 mr-2" />} */}
