@@ -24,7 +24,7 @@ interface ThemeProviderProps {
   storageKey?: string
 }
 
-export const ThemeProvider: React.FC<ThemeProviderProps> = ({
+export const ThemeContextProvider: React.FC<ThemeProviderProps> = ({
   children,
   defaultTheme = 'system',
   storageKey = 'app-theme',
