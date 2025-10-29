@@ -21,6 +21,15 @@ export const listServices = {
         return updatedListItems;
     },
 
+    update: (updatedItem: ListItem): ListItem[] => {
+        const listItems = listServices.getAll();
+        const updatedListItems = listItems.map(item =>
+            item.id === updatedItem.id ? updatedItem : item
+        );
+        listServices.saveAll(updatedListItems);
+        return updatedListItems;
+    },
+
     clearAll: (): void => {
         localStorage.removeItem(STORAGE_KEY);
     }

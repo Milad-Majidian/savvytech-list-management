@@ -1,5 +1,6 @@
 import type { ListItem } from "../types";
 import { Button } from "@/components/elements/Button";
+import { Edit } from "lucide-react";
 
 interface ListItemProps {
   item: ListItem;
@@ -29,14 +30,14 @@ export function ListItem({ item , onEdit }: ListItemProps) {
       <div className="flex items-center justify-between gap-2 p-3 rounded-xl border bg-card shadow-sm hover:shadow-md transition">
           <div>
         <h3 className="font-semibold text-lg">{item.title}</h3>
-        <p className="text-muted-foreground text-sm">{item.subTitle}</p>
+       {item.subTitle && <p className="text-muted-foreground text-sm">{item.subTitle}</p>}
         <p className="text-xs text-muted-foreground mt-1">
           {format(item.createdAt, "yyyy-MM-dd HH:mm")}
         </p>
       </div>
       <div className="space-x-2">
-        <Button size="sm" variant="secondary" onClick={() => onEdit(item)}>
-          Edit
+        <Button size="sm" variant="secondary" onClick={() => onEdit(item)} className="cursor-pointer">
+          <Edit className="w-4 h-4" />
         </Button>
         <Button size="sm" variant="destructive" onClick={() => {}}>
           Delete

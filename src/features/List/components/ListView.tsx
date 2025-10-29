@@ -20,26 +20,29 @@ export default function ListView() {
     setOpen(true);
   };
 
-
   return (
     <>
       <div className="p-4">
-             <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-semibold">List Management</h2>
-        <Button onClick={handleCreate}>Create</Button>
-      </div>
+        <div className="flex justify-between items-center">
+          <h2 className="text-2xl font-semibold">List Management</h2>
+          <Button onClick={handleCreate}>Create</Button>
+        </div>
 
-        <div className="space-y-3">
-        {listItems.length ? (
-          listItems.map(item => (
-            <ListItem key={item.id} item={item} onEdit={handleEdit} />
-          ))
-        ) : (
+        <div className="space-y-3 mt-2">
+          {listItems.length ? (
+            listItems.map((item) => (
+              <ListItem key={item.id} item={item} onEdit={handleEdit} />
+            ))
+          ) : (
             <ListEmptyState />
-        )}
-      </div>
+          )}
+        </div>
 
-      <ListModal open={open} onOpenChange={setOpen} editingItem={editingItem} />
+        <ListModal
+          open={open}
+          onOpenChange={setOpen}
+          editingItem={editingItem}
+        />
       </div>
     </>
   );

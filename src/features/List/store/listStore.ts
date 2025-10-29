@@ -6,6 +6,7 @@ import { listServices } from "../services/listServices";
 interface ListStore {
   listItems: ListItem[];
   addItem: (item: Omit<ListItem, "id" | "createdAt">) => void;
+  updateItem: (item: ListItem) => void;
 }
 
 export const useListStore = create<ListStore>()(
@@ -25,11 +26,11 @@ export const useListStore = create<ListStore>()(
         set({ listItems: updated });
       },
 
-
-      // Delete list item by id
-
-
-      // clear all list items
+      // update existing list item
+      updateItem: (item: ListItem) => {
+        const updated = listServices.update(item);
+        set({ listItems: updated });
+      },
 
       // clear all list items
       clearAll: () => {
@@ -39,6 +40,13 @@ export const useListStore = create<ListStore>()(
     }),
     {
       name: "list-storage",
+      // Ensure data is loaded from localStorage on initialization
+      onRehydrateStorage: () => (state) => {
+        if (state) {
+          const storedItems = listServices.getAll();
+          state.listItems = storedItems;
+        }
+      },
     }
   )
 );

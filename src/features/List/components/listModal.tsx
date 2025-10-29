@@ -1,6 +1,7 @@
 // src/features/list/components/ListModal.tsx
 "use client";
 
+import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -24,22 +25,40 @@ interface Props {
 }
 
 export const ListModal = ({ open, onOpenChange, editingItem }: Props) => {
-  const { addItem } = useListStore();
+  const { addItem, updateItem } = useListStore();
 
   const form = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
-      title: editingItem?.title ?? "",
-      subtitle: editingItem?.subTitle ?? "",
+      title: "",
+      subtitle: "",
     },
-    values: editingItem
-      ? { title: editingItem.title, subtitle: editingItem.subTitle }
-      : undefined,
   });
+
+  // Reset form when modal opens/closes or editingItem changes
+  React.useEffect(() => {
+    if (open) {
+      if (editingItem) {
+        form.reset({
+          title: editingItem.title,
+          subtitle: editingItem.subTitle,
+        });
+      } else {
+        form.reset({
+          title: "",
+          subtitle: "",
+        });
+      }
+    }
+  }, [open, editingItem, form]);
 
   const handleSubmit = (data: FormData) => {
     if (editingItem) {
-    //   updateItem({ ...editingItem, ...data });
+      updateItem({
+        ...editingItem,
+        title: data.title,
+        subTitle: data.subtitle || "",
+      });
     } else {
       addItem({
         title: data.title,
