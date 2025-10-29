@@ -21,7 +21,7 @@ export const useListStore = create<ListStore>()(
         const newItem: ListItem = {
           id: crypto.randomUUID(),
           title: data.title,
-          subTitle: data.subTitle,
+          subtitle: data.subtitle,
           createdAt: new Date(),
         };
         const updated = listServices.create(newItem);
