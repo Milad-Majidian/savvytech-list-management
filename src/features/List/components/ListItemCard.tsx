@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { ListItem } from "../types";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Input } from "@/components/elements/Input";
+import { Button } from "@/components/elements/Button";
 
 export function ListItemCard({ listItem }: { listItem: ListItem }) {
   const [isEditing, setIsEditing] = useState(false);

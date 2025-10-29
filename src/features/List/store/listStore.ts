@@ -1,20 +1,18 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
-import type { ListItem } from '../types';
-
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import type { ListItem } from "../types";
 
 interface ListStore {
-    listItems: ListItem[];
-    }
+  listItems: ListItem[];
+}
 
 export const useListStore = create<ListStore>()(
-    persist(
-        (set) => ({
-            listItems: [], 
-        }),
-        {
-            name: 'list-storage', 
-        }
-    )
+  persist(
+    (set) => ({
+      listItems: [],
+    }),
+    {
+      name: "list-storage",
+    }
+  )
 );
-
