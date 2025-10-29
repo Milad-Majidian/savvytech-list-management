@@ -126,10 +126,40 @@ button {
   color: hsl(var(--primary-foreground));
 }
 
+/* Modal overlay improvements */
+[data-radix-popper-content-wrapper] {
+  z-index: 50;
+}
+
+/* Clean modal overlay */
+.fixed.inset-0.z-50.bg-black\/80 {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+}
+
+.dark .fixed.inset-0.z-50.bg-black\/80 {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Modal content animations */
+[data-state="open"] {
+  animation-duration: 300ms !important;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+[data-state="closed"] {
+  animation-duration: 200ms !important;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
 /* Reduced motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
   * {
     transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+  
+  [data-state="open"],
+  [data-state="closed"] {
     animation-duration: 0.01ms !important;
   }
 }
