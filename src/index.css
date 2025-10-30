@@ -92,6 +92,18 @@ body {
               color var(--theme-transition);
 }
 
+/* Utility aliases for theme tokens (works everywhere) */
+@layer utilities {
+  /* Colors */
+  .bg-muted { background-color: hsl(var(--muted)); }
+  .bg-muted\/40 { background-color: hsl(var(--muted) / 0.4); }
+  .text-muted-foreground { color: hsl(var(--muted-foreground)); }
+  .text-foreground { color: hsl(var(--foreground)); }
+  .bg-card { background-color: hsl(var(--card)); }
+  .border-border { border-color: hsl(var(--border)); }
+  .ring-border { --tw-ring-color: hsl(var(--border)); }
+}
+
 /* Enhanced button transitions */
 button {
   transition: all var(--theme-transition);

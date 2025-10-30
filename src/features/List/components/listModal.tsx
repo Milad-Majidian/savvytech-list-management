@@ -51,7 +51,7 @@ export const ListModal = ({ open, onOpenChange, editingItem }: Props) => {
             <Button 
             appVariant="ghost" 
             onClick={() => onOpenChange(false)}
-            className="border border-zinc-200 cursor-pointer"
+            className="border border-zinc-200 cursor-pointer text-white"
             >
             Cancel
             </Button>
@@ -59,7 +59,6 @@ export const ListModal = ({ open, onOpenChange, editingItem }: Props) => {
             type="submit" 
             form="list-item-form"
             // className="bg-primary text-primary-foreground hover:bg-primary/90"
-
             className="bg-blue-500 text-primary-foreground hover:bg-blue-600 cursor-pointer"
             >
             {editingItem ? "Update" : "Create"}

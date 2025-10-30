@@ -7,7 +7,7 @@ import { ListModal } from "./listModal";
 import { useListModals } from "../hooks/useListModals";
 import { formatDate, dateFormats } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
-import { Edit, List, Plus, Trash2 } from "lucide-react";
+import { Edit, Trash2 } from "lucide-react";
 
 export default function ListView() {
   const { listItems, deleteItem, clearAll } = useListStore();
@@ -33,19 +33,19 @@ export default function ListView() {
           <h2 className="text-2xl font-semibold tracking-tight">List Management</h2>
         </div>
         <div className="flex items-center gap-2">
-          <Button
+            <Button
             variant="secondary"
             onClick={() => setConfirmClearOpen(true)}
             disabled={listItems.length === 0}
             aria-label="Clear all items"
-            className="cursor-pointer text-red-600 border-red-600 hover:bg-red-600/10 hover:text-red-700"
-          >
+            className="bg-gray-50 text-red-600 hover:bg-red-50 cursor-pointer"
+            >
             Clear all
-          </Button>
-          <Button onClick={openCreate} aria-label="Create item" 
-          className="hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+            </Button>
+            <Button onClick={openCreate} aria-label="Create item" 
+            className="bg-gray-50 text-black hover:bg-blue-100 duration-200 cursor-pointer">
             Create
-          </Button>
+            </Button>
         </div>
       </div>
 
@@ -59,7 +59,8 @@ export default function ListView() {
                   <th className="px-4 py-3 font-medium text-muted-foreground text-left">Title</th>
                   <th className="px-4 py-3 font-medium text-muted-foreground text-left">Subtitle</th>
                   <th className="px-4 py-3 font-medium text-muted-foreground text-left">Created</th>
-                  <th className="w-[100px] px-4 py-3 font-medium text-muted-foreground text-center">Actions</th>
+                  <th className="px-4 py-3 font-medium text-muted-foreground text-left">Updated</th>
+                  <th className="w-[120px] px-4 py-3 font-medium text-muted-foreground text-center">Actions</th>
                 </tr>
               </thead>
               <motion.tbody layout className="divide-y">
@@ -84,12 +85,15 @@ export default function ListView() {
                       <td className="px-4 py-3 text-muted-foreground text-left">
                         {formatDate(item.createdAt, dateFormats.dateTime)}
                       </td>
+                      <td className="px-4 py-3 text-muted-foreground text-left">
+                        {item.updatedAt ? formatDate(item.updatedAt, dateFormats.dateTime) : "—"}
+                      </td>
                       <td className="px-4 py-3">
                         <div className="flex items-center justify-end gap-2">
-                          <Button size="sm" variant="secondary" aria-label={`Edit ${item.title}`} onClick={() => openEdit(item)} className="hover:bg-zinc-50 cursor-pointer">
+                          <Button size="sm" variant="secondary" aria-label={`Edit ${item.title}`} onClick={() => openEdit(item)} className="cursor-pointer">
                             <Edit className="w-4 h-4" />
                           </Button>
-                          <Button size="sm" variant="destructive" aria-label={`Delete ${item.title}`} onClick={() => openDelete(item)} className="hover:bg-red-600/10 hover:text-red-700 cursor-pointer">
+                          <Button size="sm" variant="destructive" aria-label={`Delete ${item.title}`} onClick={() => openDelete(item)} className="cursor-pointer">
                             <Trash2 className="w-4 h-4 text-red-600" />
                           </Button>
                         </div>

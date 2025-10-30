@@ -28,9 +28,13 @@ export const useListStore = create<ListStore>()(
         set({ listItems: updated });
       },
 
-      // update existing list item
+      // update existing list item (stamp updatedAt)
       updateItem: (item: ListItem) => {
-        const updated = listServices.update(item);
+        const updatedItem: ListItem = {
+          ...item,
+          updatedAt: new Date(),
+        };
+        const updated = listServices.update(updatedItem);
         set({ listItems: updated });
       },
 

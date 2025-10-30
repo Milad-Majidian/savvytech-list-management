@@ -4,10 +4,25 @@ import type { ListItem } from "../types";
 const STORAGE_KEY = 'list-Items';
 
 
+// Ensure date fields are hydrated to Date instances when reading from storage
+function hydrateItem(raw: any): ListItem {
+    return {
+        ...raw,
+        createdAt: new Date(raw.createdAt),
+        updatedAt: raw.updatedAt ? new Date(raw.updatedAt) : undefined,
+    } as ListItem;
+}
+
 export const listServices = {
     getAll:(): ListItem[] => {
         const data = localStorage.getItem(STORAGE_KEY);
-        return data ? JSON.parse(data) : [];
+        if (!data) return [];
+        try {
+            const parsed = JSON.parse(data);
+            return Array.isArray(parsed) ? parsed.map(hydrateItem) : [];
+        } catch {
+            return [];
+        }
     },
 
     saveAll: (Items: ListItem[]): void => {
