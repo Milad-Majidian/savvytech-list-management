@@ -92,6 +92,13 @@ body {
               color var(--theme-transition);
 }
 
+/* Neutralize margin shift added by scroll lock (react-remove-scroll / Radix)
+   Use higher specificity so it wins even if the locker injects its rule later. */
+html body[data-scroll-locked] {
+  margin-right: 0 !important;
+  padding-right: 0 !important;
+}
+
 /* Utility aliases for theme tokens (works everywhere) */
 @layer utilities {
   /* Colors */
