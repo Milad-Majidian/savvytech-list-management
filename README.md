@@ -1,73 +1,108 @@
-# React + TypeScript + Vite
+# SavvyTech List Management
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+SavvyTech List Management is a modern React application for managing lightweight item lists. It showcases a polished UI built with Tailwind CSS tokens, Radix primitives, and custom theming that supports light and dark modes. Data is persisted locally, giving an app-like feel without a backend.
 
-Currently, two official plugins are available:
+## Features
+- Responsive list dashboard with sortable-like layout and subtle motion.
+- CRUD item management backed by Zustand with localStorage persistence.
+- Radix-powered modal workflow with consistent theming and scroll-lock handling.
+- Tailwind v4 pipeline using semantic design tokens for consistent styling.
+- Theme toggle with no-flash script and accessible focus states.
+- Comprehensive unit tests for utilities, store logic, and services using Vitest.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
+- [Vite 7](https://vitejs.dev/) + React 19 + TypeScript
+- [Tailwind CSS v4](https://tailwindcss.com/) with custom token mapping
+- [Radix UI](https://www.radix-ui.com/) + shadcn-inspired components
+- [Zustand](https://zustand-demo.pmnd.rs/) state management
+- [Vitest](https://vitest.dev/) + Testing Library for testing
+- pnpm for dependency management
 
-## React Compiler
+## Getting Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Prerequisites
+- Node.js 20+
+- [pnpm](https://pnpm.io/) 9+
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Installation
+```bash
+pnpm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Running in Development
+```bash
+pnpm dev
 ```
+The dev server runs on `http://localhost:5173` by default.
+
+### Production Build
+```bash
+pnpm build
+```
+This command runs TypeScript checks and emits the production bundle to the `dist/` folder.
+
+Preview the production build locally with:
+```bash
+pnpm preview
+```
+
+## Testing
+
+Vitest is configured with jsdom, Testing Library, and custom setup mocks.
+
+Run the suite once:
+```bash
+pnpm test --run
+```
+
+Watch mode:
+```bash
+pnpm test:watch
+```
+
+Generate coverage reports (text, JSON, HTML in `coverage/`):
+```bash
+pnpm test:coverage
+```
+
+Launch the Vitest UI runner:
+```bash
+pnpm test:ui
+```
+
+## Linting & Formatting
+
+```bash
+pnpm lint
+```
+
+Formatting is handled via Prettier (see project configuration).
+
+## Project Structure
+
+```
+src/
+├─ assets/                 # Static assets
+├─ components/             # Reusable UI elements and layout primitives
+├─ contexts/               # Theme context provider
+├─ features/List/          # List domain (components, store, services, schemas)
+├─ lib/                    # Shared utilities
+├─ providers/              # App-wide providers
+└─ test/                   # Test setup and shared typings
+```
+
+## Theming Notes
+- Theme tokens live in `tailwind.tokens.ts` and are wired into Tailwind via CSS variables.
+- `index.html` contains the no-flash theme initialization script.
+- Scroll locking and modal animations are handled in `src/index.css`.
+
+## Contributing
+1. Fork the repository and create a branch.
+2. Install dependencies with `pnpm install`.
+3. Implement changes with accompanying tests.
+4. Run `pnpm lint` and `pnpm test --run`.
+5. Submit a pull request describing your updates.
+
+## License
+
+This project is currently unlicensed. Reach out to the maintainer (Milad Majidian) for usage inquiries.
