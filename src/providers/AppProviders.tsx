@@ -1,5 +1,5 @@
 import { ThemeContextProvider } from "@/contexts/ThemeContext";
-// import other providers here, e.g., ToastProvider, QueryClientProvider
+// import other providers here, ToastProvider, QueryClientProvider
 
 
 export const AppProviders = ({ children }: { children: React.ReactNode }) => {

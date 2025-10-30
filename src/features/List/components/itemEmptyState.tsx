@@ -1,5 +1,4 @@
 
-
 import { ClipboardList } from "lucide-react";
 
 export function ListEmptyState() {

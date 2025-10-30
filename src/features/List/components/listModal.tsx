@@ -33,6 +33,13 @@ export const ListModal = ({ open, onOpenChange, editingItem }: Props) => {
     }
   }, [open, editingItem, form]);
 
+  /**
+   * Handles form submission for creating or updating a list item.
+   * 
+   * @param data - The form data containing title and optional subtitle
+   * @description If editingItem exists, updates the existing item with new data.
+   * Otherwise, creates a new item. Closes the modal after successful submission.
+   */
   const handleSubmit = (data: ListFormData) => {
     const payload = { title: data.title, subtitle: data.subtitle ?? "" };
     editingItem ? updateItem({ ...editingItem, ...payload }) : addItem(payload);
@@ -58,7 +65,6 @@ export const ListModal = ({ open, onOpenChange, editingItem }: Props) => {
             <Button 
             type="submit" 
             form="list-item-form"
-            // className="bg-primary text-primary-foreground hover:bg-primary/90"
             className="bg-blue-500 text-primary-foreground hover:bg-blue-600 cursor-pointer"
             >
             {editingItem ? "Update" : "Create"}
