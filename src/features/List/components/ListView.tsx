@@ -7,7 +7,7 @@ import { ListModal } from "./listModal";
 import { useListModals } from "../hooks/useListModals";
 import { formatDate, dateFormats } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
-import { Edit, Trash2 } from "lucide-react";
+import { Edit, Trash2, ListChecks } from "lucide-react";
 
 export default function ListView() {
   const { listItems, deleteItem, clearAll } = useListStore();
@@ -30,7 +30,12 @@ export default function ListView() {
       {/* Header */}
       <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="text-left">
-          <h2 className="text-2xl font-semibold tracking-tight">List Management</h2>
+          <div className="flex items-center gap-2">
+            <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-muted text-muted-foreground">
+              <ListChecks className="h-6 w-6" aria-hidden="true" />
+            </span>
+            <h2 className="text-2xl font-semibold tracking-tight text-muted-foreground">List Management</h2>
+          </div>
         </div>
         <div className="flex items-center gap-2">
             <Button
