@@ -4,10 +4,47 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <style>
+      /* Disable transitions during initial theme application to prevent flash */
+      .no-theme-transition *, .no-theme-transition *::before, .no-theme-transition *::after {
+        transition: none !important;
+      }
+    </style>
+    <script id="theme-init">
+      (function () {
+        try {
+          var storageKey = 'app-theme';
+          var stored = localStorage.getItem(storageKey);
+          var mql = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+          var systemDark = mql && mql.matches;
+          var theme = (stored === 'light' || stored === 'dark' || stored === 'system') ? stored : 'system';
+          var resolved = theme === 'system' ? (systemDark ? 'dark' : 'light') : theme;
+          var root = document.documentElement;
+          // Set class and attribute ASAP
+          root.classList.add(resolved);
+          root.setAttribute('data-theme', resolved);
+          // Prevent transition flash and set a safe background to avoid white flash
+          root.classList.add('no-theme-transition');
+          root.style.backgroundColor = resolved === 'dark' ? '#0B0B0F' : '#FFFFFF';
+        } catch (e) {
+          // no-op
+        }
+      })();
+    </script>
     <title>savvytech-list-management</title>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // Re-enable transitions after the page has loaded and CSS is applied
+      window.addEventListener('load', function () {
+        var root = document.documentElement;
+        root.classList.remove('no-theme-transition');
+        // Remove the inline background so token-based background takes over
+        root.style.backgroundColor = '';
+      });
+    </script>
   </body>
 </html>
