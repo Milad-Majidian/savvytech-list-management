@@ -172,14 +172,15 @@ button {
   100% { opacity: 0; scale: 0.96; }
 }
 
+/* Animate only opacity on overlay to avoid re-rasterization jitter */
 @keyframes smooth-overlay-enter {
-  0%   { opacity: 0; backdrop-filter: blur(0px); }
-  100% { opacity: 1; backdrop-filter: blur(4px); }
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 @keyframes smooth-overlay-exit {
-  0%   { opacity: 1; backdrop-filter: blur(4px); }
-  100% { opacity: 0; backdrop-filter: blur(0px); }
+  0%   { opacity: 1; }
+  100% { opacity: 0; }
 }
 
 .modal-content { transform-origin: center center; will-change: transform, opacity, scale; }
@@ -192,12 +193,18 @@ button {
   animation: smooth-modal-exit 250ms cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
+.modal-overlay {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  will-change: opacity;
+}
+
 .modal-overlay[data-state="open"] {
-  animation: smooth-overlay-enter 350ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: smooth-overlay-enter 300ms ease-out both;
 }
 
 .modal-overlay[data-state="closed"] {
-  animation: smooth-overlay-exit 250ms cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation: smooth-overlay-exit 200ms ease-in both;
 }
 
 /* Reduced motion for accessibility */
