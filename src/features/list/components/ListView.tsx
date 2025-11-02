@@ -6,7 +6,7 @@ import { useListModals } from "../hooks/useListModals";
 import { formatDate, dateFormats } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { Edit, Trash2, ListChecks } from "lucide-react";
-import { ListModal } from "./listModal";
+import { ListModal } from "./ListModal";
 import { ListEmptyState } from "./ItemEmptyState";
 
 
