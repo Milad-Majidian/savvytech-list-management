@@ -1,7 +1,7 @@
 
 import './App.css'
 import { Layout } from './components/Layout/Layout'
-import ListView from './features/List/components/ListView'
+import ListView from './features/list/components/ListView'
 
 function App() {
 

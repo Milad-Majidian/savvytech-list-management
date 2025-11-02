@@ -7,7 +7,9 @@ import { formatDate, dateFormats } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { Edit, Trash2, ListChecks } from "lucide-react";
 import { ListModal } from "./listModal";
-import { ListEmptyState } from "./itemEmptyState";
+import { ListEmptyState } from "./ItemEmptyState";
+
+
 
 export default function ListView() {
   const { listItems, deleteItem, clearAll } = useListStore();
